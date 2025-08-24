@@ -1,13 +1,36 @@
 <div class="w-full h-[100vh] bg-[#EEEEEE] flex flex-col
-justify-center items-center">
-    <div class="bg-white flex flex-col gap-5 rounded-xl">
-        <img />
-        <h1 class="text-2xl font-bold">Iniciar Sesion</h1>
+justify-center items-center shadow-md">
+    <div class="bg-white flex flex-col gap-3 rounded-xl sm:w-[350px] md:w-2/4 p-5 ">
+        <div class="gap-5 self-center-safe">
+                <img src="imgs/logo.jpg" alt="informatica-logo" width="120" height="120"/>
+                <h1 class="text-2xl font-bold text-center">Iniciar Sesion</h1>
+        </div>
         <form>
-            <div class="flex flex-col p-5 gap-1">
+            <div class="flex flex-col px-5 gap-1">
                 <label class="font-bold">Correo Electronico*</label>
-                <input type="text" placeholder="Correo">
+                <input type="email" placeholder="Correo" class="px-3 py-2 border-4
+                 border-[#eeeeee] round-xl text-[#aaaaaa] font-bold">
             </div>
+            <div class="flex flex-col p-5 gap-1 ">
+                <label class="font-bold">Contraseña*</label>
+                <input type="password" placeholder="Contraseña"
+                class="px-3 py-2 border-4
+                 border-[#eeeeee] round-xl text-[#aaaaaa] font-bold">
+            </div>
+            
+            <div class="flex flex-col pt-5 px-5  ">
+                <button type="submit " class="bg-[#00897D] text-white font-bold
+                text-2xl hover: cursor-pointer hover:bg-green-800 transform transition h-10
+                rounded-md">Ingresar</button>
+            </div>
+            
         </form>
+        <div class="flex flex-col gap-2">
+            <a routerLink=""
+            class="text-center font-bold text-md text-[#00897D]">¿ Se te olvido tu contraseña ? </a>
+            <p class="text-center font-bold">¿ No tienes cuenta ? <a 
+                routerLink="/register"
+                class="text-center font-bold text-md text-[#00897D]">Inscribirse</a></p>
+        </div>
     </div>
 </div>
