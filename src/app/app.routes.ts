@@ -45,30 +45,6 @@ export const routes: Routes = [
             }
         ]
     },
-    // O si realmente necesitas el parámetro ID:
-    {
-        path: 'user/:id',
-        component: MainLayoutComponent,
-        children: [
-            {
-                path: '',
-                redirectTo: 'home',
-                pathMatch: 'full'
-            },
-            {
-                path: 'home',
-                component: HomeComponent
-            },
-            {
-                path: 'dashboard',
-                component: DashboardComponent
-            },
-            {
-                path: 'profile',
-                component: ProfileComponent
-            }
-        ]
-    },
     {
         path: '**',
         redirectTo: '/login'

@@ -1,11 +1,14 @@
-import { Component } from '@angular/core';
+import { Component, signal } from '@angular/core';
 
 @Component({
   selector: 'app-sidebar',
-  imports: [],
   templateUrl: './sidebar.component.html',
-  styleUrl: './sidebar.component.css'
+  styleUrls: ['./sidebar.component.css']
 })
 export class SidebarComponent {
-
+  menulist = signal([
+    { label: 'Inicio', icon: '/icons/home.svg' },
+    { label: 'Asesores', icon: '/icons/users.svg' },
+    { label: 'Plantillas', icon: '/icons/file.svg' }
+  ]);
 }
