@@ -1,13 +1,18 @@
 import { Component } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { FormBuilder, FormGroup, Validators, ReactiveFormsModule } from '@angular/forms';
+import {
+  FormBuilder,
+  FormGroup,
+  Validators,
+  ReactiveFormsModule,
+} from '@angular/forms';
+import { RouterLink } from '@angular/router';
 
 @Component({
   selector: 'app-register',
   standalone: true,
-  imports: [CommonModule, ReactiveFormsModule],
+  imports: [CommonModule, ReactiveFormsModule, RouterLink],
   templateUrl: './register.component.html',
-  styleUrls: ['./register.component.css']
 })
 export class RegisterComponent {
   currentStep = 1;
@@ -22,13 +27,16 @@ export class RegisterComponent {
       apellidoMaterno: ['', [Validators.required, Validators.minLength(2)]],
       fechaNacimiento: ['', Validators.required],
       genero: ['', Validators.required],
-      numeroDocumento: ['', [Validators.required, Validators.pattern(/^\d{8}$/)]],
-      
+      numeroDocumento: [
+        '',
+        [Validators.required, Validators.pattern(/^\d{8}$/)],
+      ],
+
       // Datos de tesis
       correo: ['', [Validators.required, Validators.email]],
       contrasena: ['', [Validators.required, Validators.minLength(6)]],
       codigo: ['', [Validators.required, Validators.pattern(/^\d{10}$/)]],
-      modalidadTesis: ['', Validators.required]
+      modalidadTesis: ['', Validators.required],
     });
   }
 
@@ -50,9 +58,16 @@ export class RegisterComponent {
 
   isStepValid(step: number): boolean {
     if (step === 1) {
-      const personalFields = ['nombre', 'apellidoPaterno', 'apellidoMaterno', 'fechaNacimiento', 'genero', 'numeroDocumento'];
-      return personalFields.every(field => 
-        this.registerForm.get(field)?.valid
+      const personalFields = [
+        'nombre',
+        'apellidoPaterno',
+        'apellidoMaterno',
+        'fechaNacimiento',
+        'genero',
+        'numeroDocumento',
+      ];
+      return personalFields.every(
+        (field) => this.registerForm.get(field)?.valid
       );
     }
     return true;
@@ -61,9 +76,11 @@ export class RegisterComponent {
   getFieldError(fieldName: string): string {
     const field = this.registerForm.get(fieldName);
     if (field?.errors && field.touched) {
-      if (field.errors['required']) return `${this.getFieldDisplayName(fieldName)} es requerido`;
+      if (field.errors['required'])
+        return `${this.getFieldDisplayName(fieldName)} es requerido`;
       if (field.errors['email']) return 'Formato de correo inválido';
-      if (field.errors['minlength']) return `Mínimo ${field.errors['minlength'].requiredLength} caracteres`;
+      if (field.errors['minlength'])
+        return `Mínimo ${field.errors['minlength'].requiredLength} caracteres`;
       if (field.errors['pattern']) {
         if (fieldName === 'numeroDocumento') return 'Debe tener 8 dígitos';
         if (fieldName === 'codigo') return 'Debe tener 10 dígitos';
@@ -73,17 +90,17 @@ export class RegisterComponent {
   }
 
   getFieldDisplayName(fieldName: string): string {
-    const names: {[key: string]: string} = {
-      'nombre': 'Nombre',
-      'apellidoPaterno': 'Apellido Paterno',
-      'apellidoMaterno': 'Apellido Materno',
-      'fechaNacimiento': 'Fecha de Nacimiento',
-      'genero': 'Género',
-      'numeroDocumento': 'Número de Documento',
-      'correo': 'Correo',
-      'contrasena': 'Contraseña',
-      'codigo': 'Código',
-      'modalidadTesis': 'Modalidad de Tesis'
+    const names: { [key: string]: string } = {
+      nombre: 'Nombre',
+      apellidoPaterno: 'Apellido Paterno',
+      apellidoMaterno: 'Apellido Materno',
+      fechaNacimiento: 'Fecha de Nacimiento',
+      genero: 'Género',
+      numeroDocumento: 'Número de Documento',
+      correo: 'Correo',
+      contrasena: 'Contraseña',
+      codigo: 'Código',
+      modalidadTesis: 'Modalidad de Tesis',
     };
     return names[fieldName] || fieldName;
   }
@@ -95,7 +112,7 @@ export class RegisterComponent {
       alert('¡Registro exitoso!');
     } else {
       // Marcar todos los campos como tocados para mostrar errores
-      Object.keys(this.registerForm.controls).forEach(key => {
+      Object.keys(this.registerForm.controls).forEach((key) => {
         this.registerForm.get(key)?.markAsTouched();
       });
     }
